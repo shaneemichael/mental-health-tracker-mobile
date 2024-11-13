@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mental_health_tracker/widgets/left_drawer.dart';
-import 'package:provider/provider.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:mental_health_tracker/screens/menu.dart';
+import 'package:mental_health_tracker/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
 
 class MoodEntryFormPage extends StatefulWidget {
@@ -17,7 +17,6 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
   String _mood = "";
 	String _feelings = "";
 	int _moodIntensity = 0;
-
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -36,7 +35,7 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          child: Column(
+          child: Column(  
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -62,7 +61,6 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
                   },
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
@@ -126,31 +124,31 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
                         // Kirim ke Django dan tunggu respons
                         // Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                         final response = await request.postJson(
-                            "http://http://127.0.0.1:8000/create-flutter/",
-                            jsonEncode(<String, String>{
-                                'mood': _mood,
-                                'mood_intensity': _moodIntensity.toString(),
-                                'feelings': _feelings,
-                            // Sesuaikan field data sesuai dengan aplikasimu
-                            }),
+                          "http://127.0.0.1:8000/create-flutter/",
+                          jsonEncode(<String, String>{
+                            'mood': _mood,
+                            'mood_intensity': _moodIntensity.toString(),
+                            'feelings': _feelings,
+                          // Sesuaikan field data sesuai dengan aplikasimu
+                          }),
                         );
                         if (context.mounted) {
-                            if (response['status'] == 'success') {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                content: Text("Mood baru berhasil disimpan!"),
-                                ));
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                                );
-                            } else {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                    content:
-                                        Text("Terdapat kesalahan, silakan coba lagi."),
-                                ));
-                            }
+                          if (response['status'] == 'success') {
+                            ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Mood baru berhasil disimpan!"),
+                            ));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => MyHomePage()),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                              content:
+                                Text("Terdapat kesalahan, silakan coba lagi."),
+                            ));
+                          }
                         }
                       }
                     },
@@ -162,7 +160,7 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
                 ),
               ),
             ],
-          )
+          ),
         ),
       ),
     );

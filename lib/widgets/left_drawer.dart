@@ -29,6 +29,7 @@ class LeftDrawer extends StatelessWidget {
                 Padding(padding: EdgeInsets.all(8)),
                 Text(
                   "Ayo jaga kesehatan mentalmu setiap hari disini!",
+                  // Menambahkan gaya teks dengan center alignment, font ukuran 15, warna putih, dan weight biasa
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
@@ -59,24 +60,23 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MoodEntryFormPage(),
+                    builder: (context) => MoodEntryFormPage(),
                   ));
             },
           ),
           ListTile(
-              leading: const Icon(Icons.add_reaction_rounded),
-              title: const Text('Daftar Mood'),
-              onTap: () {
-                  // Route menu ke halaman mood
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MoodEntryPage()),
-                  );
-              },
+            leading: const Icon(Icons.add_reaction_rounded),
+            title: const Text('Daftar Mood'),
+            onTap: () {
+              // Route menu ke halaman mood
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MoodEntryPage()),
+              );
+            },
           ),
         ],
       ),
     );
   }
 }
-
